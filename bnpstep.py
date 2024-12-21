@@ -1062,7 +1062,7 @@ class BNPStep:
             #     fig.savefig(output_filename, format='pdf')
             if (plot == 'step'):
                 # General figure setup
-                fig = plt.figure()
+                fig = plt.figure(figsize=(20,5))
 
                 if plot_alt_results and len(alt_results) == 1:
                     gs1 = GridSpec(1, 1, bottom=0.8)  # For legend
@@ -1102,7 +1102,7 @@ class BNPStep:
                 # Plot discovered steps
                 ax1.hist2d(samples[:,0],samples[:,1],bins = 50,cmap = 'Blues')
                 # Plot synthetic data
-                ax1.scatter(T, self.dataset["data"], alpha=0.7, color=datacolor, facecolors='none', marker='.')
+                ax1.plot(T, self.dataset["data"], alpha=1, color=datacolor, linewidth = 0.5)#, facecolors='none', marker='.')
                 ax1.stairs(step_data, np.insert(T,0,T[0]), baseline=None, color=learncolor, linewidth=1.0, zorder=10)
 
 
@@ -1251,6 +1251,8 @@ class BNPStep:
                                         ncol=2, mode="none", borderaxespad=0., edgecolor=(1.0, 1.0, 1.0, 0.0), prop=fnt_mgr, borderpad=0.8)
 
                 # Show plot, then save figure
+
+                plt.ylim((0,1))
                 plt.show()
                 # TODO: add user option to generate figure type other than pdf
                 output_filename = fig_savename + '_' + plot + '.pdf'
@@ -2025,7 +2027,7 @@ class BNPStep:
                 # Add legend
                 ax0.legend(bbox_to_anchor=(0., 1.08, 1., .102), handles=handle_array,
                             loc='lower center', ncol=num_cols, mode="none", borderaxespad=0., borderpad=0.8, edgecolor=(1.0, 1.0, 1.0, 0.0), prop=fnt_mgr)
-            
+
                 # Show plot, then save figure
                 plt.show()
                 # TODO: add user option to generate figure type other than pdf
